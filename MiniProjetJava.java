@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class MiniProjetJava {
 
-    static String getText(String filepath){ //Methode getText qui permet de récupéré le text d'un fichier .txt avec son chemin d'accès en paramètre.
+     static String getText(String filepath){ //Methode getText qui permet de récupéré le text d'un fichier .txt avec son chemin d'accès en paramètre.
 
         String text;
 
@@ -22,61 +22,39 @@ public class MiniProjetJava {
         return text;
     }
 
-    static String[] getWordList(String text){ //Version 1 de getWordList
+    static String[] getWordList(String text){ //Version 2 de getWordList
 
-        char[] texttochar = text.toCharArray();
+        char[] chartext = text.toLowerCase().toCharArray();
+        String[] wordList = new String[0]; //Création de la liste de mot avec aucun élément
 
-        for(int i = 0; i < texttochar.length; i++){ //boucle permettant de remplacer la ponctuation par des espaces et d'enlever les accents
+        String mot = "";//création d'un mot vide
+        for(char c : chartext ) { //cette boucle for permet de construire les mots et de les ajouter à la liste
 
-            char c = texttochar[i];
-            switch(c){
-                case 'ê':
-                case 'ë':
-                case 'é':
-                case 'è': {c = 'e'; break;}
-                case 'â':
-                case 'ä':
-                case 'à': {c = 'a'; break;}
-                case 'ü':
-                case 'ù':
-                case 'û': {c = 'u'; break;}
-                case 'ï':
-                case 'î': {c = 'i'; break;}
-                case 'ö':
-                case 'ô': {c = 'o'; break;}
-                case 'Ê':
-                case 'Ë':
-                case 'È':
-                case 'É': {c = 'E'; break;}
-                case 'Ä':
-                case 'Â':
-                case 'À': {c = 'A'; break;}
-                case 'Ü':
-                case 'Ù':
-                case 'Û': {c = 'U'; break;}
-                case 'Ï':
-                case 'Î': {c = 'I'; break;}
-                case 'Ö':
-                case 'Ô': {c = 'O'; break;}
-            }
-            if(!(('A' <= c && c <= 'Z' ) || ('a' <= c && c <= 'z'))){
-                c = ' ';
-            }
-            texttochar[i] = c;
+            if (('a' <= c && c <= 'z') ||
+                 c == 'ê' ||
+                 c == 'ë' ||
+                 c == 'é' ||
+                 c == 'è' ||
+                 c == 'â' ||
+                 c == 'ä' ||
+                 c == 'à' ||
+                 c == 'ü' ||
+                 c == 'ù' ||
+                 c == 'û' ||
+                 c == 'ï' ||
+                 c == 'î' ||
+                 c == 'ö' ||
+                 c == 'ô') {
+                 mot += c;} //si c est une lettre, alors on l'ajoute au mot
+
+            else{if(!mot.equals("")) wordList = addTabElementToEnd(wordList, mot); // sinon on ajouter le mot à la liste s'il n'est pas vide
+                mot = "";} //on créer un nouveau mot où l'on peut ajouter des lettres.
         }
+        for(int i = 0; i < wordList.length; i++) //boucle for qui supprime les mots d'une lettre ou moins.
+            if(wordList[i].length() <= 1)
+                wordList = deleteTabElement(wordList, i);
 
-        for(int i = 0; i < texttochar.length; i++){ //suppression des espaces qui se suivent (mots séparé par un seul espace)
-            if(texttochar[i] == ' ' && texttochar[i + 1] == ' '){
-                texttochar = deleteTabElement(texttochar, i+1);
-            }
-        }
-
-        String stringtext = "";
-        for(char c : texttochar){ //creation d'un String contenant les mots séparés par un espace
-            stringtext += c;
-        }
-
-        return stringtext.split(" "); //Retourne un Tableau de chaine contenant les mots 1 par 1
+        return wordList;
     }
 
     static char[] deleteTabElement(char[] tab, int elementPos){
@@ -89,6 +67,27 @@ public class MiniProjetJava {
         for(int i = elementPos; i < newtab.length; i++){
             newtab[i] = tab[i + 1];
         }
+        return newtab;
+    }
+
+    static String[] deleteTabElement(String[] tab, int elementPos){
+
+        String[] newtab = new String[tab.length-1];
+
+        for(int i = 0; i < elementPos; i++){
+            newtab[i] = tab[i];
+        }
+        for(int i = elementPos; i < newtab.length; i++){
+            newtab[i] = tab[i + 1];
+        }
+        return newtab;
+    }
+
+    static String[] addTabElementToEnd(String[] tab, String s){
+        String[] newtab = new String[tab.length+1];
+        for(int i = 0; i < tab.length; i++)
+            newtab[i] = tab[i];
+        newtab[newtab.length-1] = s;
         return newtab;
     }
 
