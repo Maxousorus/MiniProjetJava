@@ -57,19 +57,6 @@ public class MiniProjetJava {
         return wordList;
     }
 
-    static char[] deleteTabElement(char[] tab, int elementPos){
-
-        char[] newtab = new char[tab.length-1];
-
-        for(int i = 0; i < elementPos; i++){
-            newtab[i] = tab[i];
-        }
-        for(int i = elementPos; i < newtab.length; i++){
-            newtab[i] = tab[i + 1];
-        }
-        return newtab;
-    }
-
     static String[] deleteTabElement(String[] tab, int elementPos){
 
         String[] newtab = new String[tab.length-1];
