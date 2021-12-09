@@ -11,7 +11,7 @@ public class Timer {
      * @param minutes nombre de minutes pendant lesquelles le programme attend
      * @return
      */
-    public static boolean attendreMinutes(double minutes) {
+    public static boolean attendreMinutes(long minutes) {
 
         return attendreSecondes(minutes *60);
     }
@@ -21,9 +21,13 @@ public class Timer {
      * @param secondes nombre de secondes pendant lesquelles le programme attend
      * @return
      */
-    public static boolean attendreSecondes(double secondes) {
+    public static boolean attendreSecondes(long secondes) {
+        return attendreMilli(secondes * 1000);
+    }
+
+    public static boolean attendreMilli(long milli){
         try {
-            Thread.sleep(1000 * secondes);
+            Thread.sleep(milli);
             return true;
         } catch (InterruptedException ex) {
             return false;
