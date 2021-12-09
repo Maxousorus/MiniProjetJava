@@ -50,14 +50,26 @@ public class MiniProjetJava {
             else {
                 if (!mot.equals(""))
                     listeMots = ajoutElementALaFin(listeMots, mot); // sinon on ajouter le mot à la liste s'il n'est pas vide
-                mot = "";
-            } //on créer un nouveau mot où l'on peut ajouter des lettres.
+                mot = ""; //on créer un nouveau mot où l'on peut ajouter des lettres.
+            }
         }
-        for (int i = 0; i < listeMots.length; i++) //boucle for qui supprime les mots d'une lettre ou moins.
-            if (listeMots[i].length() <= 1)
-                listeMots = supprElementParIndice(listeMots, i);
-
+        listeMots = supprMotsDeMoinsDe(listeMots,2); //supprime les mots d'une lettre et moins.
         return listeMots;
+    }
+
+    static String[] supprMotsDeMoinsDe(String[] tab, int longueur){//supprime les mots d'une longueur donnée et moins
+        for (int i = 0; i < tab.length; i++)
+            if (tab[i].length() < longueur)
+                tab = supprElementParIndice(tab, i);
+        return tab;
+
+    }
+
+    static String[] supprMotsDePlusDe(String[] tab, int longueur){//supprime les mots d'une longueur donnée et plus
+        for (int i = 0; i < tab.length; i++)
+            if (tab[i].length() > longueur)
+                tab = supprElementParIndice(tab, i);
+        return tab;
     }
 
     static String[] supprElementParIndice(String[] tab, int indice) {
@@ -81,7 +93,7 @@ public class MiniProjetJava {
         return newtab;
     }
 
-    static void Menu(){
+    static void Menu(){ //TODO Mettre en forme le menu
         System.out.println("Menu Principal");
         System.out.println("1 : Menu du jeu 1");
         System.out.println("2 : Menu du jeu 2");
@@ -95,7 +107,7 @@ public class MiniProjetJava {
         {    System.out.println ("Saisie un chiffre ") ;
             choixMenu = Console.lireInt() ;
             if (choixMenu > 6 || choixMenu < 1){
-                System.out.println("La saisie est incorrect");;
+                System.out.println("La saisie est incorrect");
             }
         }
         while (choixMenu > 6 || choixMenu < 1);
@@ -127,12 +139,8 @@ public class MiniProjetJava {
     public static void main(String[] args) { //Méthode main
 
         String text = recupText("src/Extrait_texte.txt");
-
         if (text.equals("ERROR")) return; //arrêt du programme en cas d'erreur de lecture.
 
-        System.out.println(text);
-
-        String[] listeDeMots = recupListeDeMots(text);
-
+        String[] listeDeMots = recupListeDeMots(text);;
     }
 }
