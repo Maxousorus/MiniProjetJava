@@ -4,12 +4,12 @@ MiniProjetJava | Création d'un programme de mini-jeu de mémoire.
  */
 
 import java.io.IOException;
-import java.util.Locale;
 
 public class MiniProjetJava {
 
-    static void ecranChargement() { //Permet de gerer le chargement qunad on lance le code PS: il ne fonctionne pas bien
-        //sur netbeans mais il fonctionne dans la console.
+    static void ecranChargement() {
+        //Permet de gerer le chargement qunad on lance le code PS: il ne fonctionne pas bien
+        //sur netbeans mais il fonctionne dans la console windows.
 
         String[] messages = {"0%  - Telechargement des methode",
             "10% - Mise en place des variables",
@@ -23,7 +23,7 @@ public class MiniProjetJava {
             "90% - Finalisation",
             "100% - Chargement terminé, amusez-vous bien !"};
 
-        for (int i = 0; i < messages.length; i++) {
+        for (int i = 0; i < messages.length; i++) { //Affiche le visuel de chargement 1 par 1
             supprConsole();
             afficherBarreChargement(messages.length, 3, i);
             System.out.println(messages[i]);
@@ -31,10 +31,10 @@ public class MiniProjetJava {
         }
     }
 
-    static void afficherBarreChargement(int nbmessages, int multiplieur, int index) {
+    static void afficherBarreChargement(int nbmessages, int multiplieur, int index) {//Gère le visuel du chargement
         nbmessages -= 1; //car le message d'index 0 ne compte pas dans la taille
 
-        int taille = (nbmessages * multiplieur);
+        int taille = (nbmessages * multiplieur); //Multiplieur permet d'augmenter la taille du visuel
         int pas = index * multiplieur;
 
         System.out.print("╔");
@@ -74,34 +74,29 @@ public class MiniProjetJava {
         return text;
     }
 
-    static char[] supprAccent(char[] chartext) {
+    static char[] supprAccent(char[] chartext) { //Supprime les accents d'une chaines de caractère
         for (int i = 0; i < chartext.length; i++) {
             char c = chartext[i];
-            if (c == 'ê'
-                    || c == 'ë'
-                    || c == 'é'
-                    || c == 'è') {
+            if (c == 'ê' || c == 'ë' || c == 'é' || c == 'è') {
                 chartext[i] = 'e';
-            } else if (c == 'â'
-                    || c == 'ä'
-                    || c == 'à') {
+                
+            } else if (c == 'â' || c == 'ä' || c == 'à') {
                 chartext[i] = 'a';
-            } else if (c == 'ü'
-                    || c == 'ù'
-                    || c == 'û') {
+                
+            } else if (c == 'ü' || c == 'ù' || c == 'û') {
                 chartext[i] = 'u';
-            } else if (c == 'ï'
-                    || c == 'î') {
+                
+            } else if (c == 'ï' || c == 'î') {
                 chartext[i] = 'i';
-            } else if (c == 'ö'
-                    || c == 'ô') {
+                
+            } else if (c == 'ö' || c == 'ô') {
                 chartext[i] = 'o';
             }
         }
         return chartext;
     }
 
-    static String[] recupListeDeMots(String text) { //Version 2 de getWordList
+    static String[] recupListeDeMots(String text) { 
 
         char[] chartext = text.toLowerCase().toCharArray();
         String[] listeMots = new String[0]; //Création de la liste de mot avec aucun élément
@@ -148,7 +143,6 @@ public class MiniProjetJava {
             }
         }
         return tab;
-
     }
 
     static String[] supprMotsDePlusDe(String[] tab, int longueur) {//supprime les mots d'une longueur donnée et plus
@@ -186,7 +180,7 @@ public class MiniProjetJava {
         return newtab; //Retourne donc la liste sans l'élément
     }
 
-    static String[][] supprElementParIndice(String[][] tab, int indice) {
+    static String[][] supprElementParIndice(String[][] tab, int indice) {//Supprime un élément d'indice precis
         for (int i = 0; i < tab.length; i++) {
             tab[i] = supprElementParIndice(tab[i], indice);
         }
@@ -204,12 +198,12 @@ public class MiniProjetJava {
         return newtab; //Retourne la liste avec l'élément en plus
     }
 
-    static String motAleatoire(String[] tab) {
+    static String motAleatoire(String[] tab) { //Recupère un mot aléatoire dans un tableau
         int random = genererUnEntier(tab.length);
         return tab[random - 1];
     }
 
-    static boolean estDansLaListe(String[] tab, String s) {
+    static boolean estDansLaListe(String[] tab, String s) { //Vérifie si un mot dans dans un liste donnée
         for (int i = 0; i < tab.length; i++) {
             if (tab[i] == s) {
                 return true;
@@ -219,7 +213,8 @@ public class MiniProjetJava {
 
     }
 
-    static boolean estComprisEntre(int nombre, int limite1, int limite2) {
+    static boolean estComprisEntre(int nombre, int limite1, int limite2) {//Vérifie si un nombre est compris 
+                                                                          //entre deux autres
         if (limite1 < limite2) { //Si la limite1 est plus petite
             return limite1 <= nombre && nombre <= limite2; //On verif si le nombre est compris entre les deux
         } else //Si la limite2 est plus grande
@@ -228,11 +223,11 @@ public class MiniProjetJava {
         }
     }
 
-    static int genererUnEntier(int max) {
+    static int genererUnEntier(int max) { //Génére un entier aléatoire avec un maximum.
         return (int) (Math.random() * max + 1);
     }
 
-    public static void controleSaisie() {
+    public static void controleSaisie() { //Permet de continuer le code lorsqu'on appuie sur Entrée
         String memo = "";
         do // Boucle qui gere le controle de la saisie
         {
@@ -339,51 +334,52 @@ public class MiniProjetJava {
         return nomstats;
     }
 
-    static void calculMoyenneStats(int[] stats) {
+    static void calculMoyenneStats(int[] stats) { //Calcule les moyennes unes par unes grâce à d'autre
+                                                  //statistiques.
 
         try {
-            stats[14] = stats[31] / stats[2];
-        } catch (ArithmeticException e) {
-        }
-
-        try {
-            stats[16] = stats[32] / stats[3];
-        } catch (ArithmeticException e) {
-        }
-        try {
-            stats[18] = stats[33] / stats[4];
+            stats[14] = stats[31] / stats[2]; //Calcule Moyenne Jeu 1 Niveau 1
         } catch (ArithmeticException e) {
         }
 
         try {
-            stats[20] = stats[34] / stats[6];
+            stats[16] = stats[32] / stats[3]; //Calcule Moyenne Jeu 1 Niveau 2
         } catch (ArithmeticException e) {
         }
         try {
-            stats[22] = stats[35] / stats[7];
-        } catch (ArithmeticException e) {
-        }
-        try {
-            stats[24] = stats[36] / stats[8];
+            stats[18] = stats[33] / stats[4]; //Calcule Moyenne Jeu 1 Niveau 3
         } catch (ArithmeticException e) {
         }
 
         try {
-            stats[26] = stats[37] / stats[10];
+            stats[20] = stats[34] / stats[6]; //Calcule Moyenne Jeu 2 Niveau 1
         } catch (ArithmeticException e) {
         }
         try {
-            stats[28] = stats[38] / stats[11];
+            stats[22] = stats[35] / stats[7]; //Calcule Moyenne Jeu 2 Niveau 2
         } catch (ArithmeticException e) {
         }
         try {
-            stats[30] = stats[39] / stats[12];
+            stats[24] = stats[36] / stats[8]; //Calcule Moyenne Jeu 2 Niveau 3
+        } catch (ArithmeticException e) {
+        }
+
+        try {
+            stats[26] = stats[37] / stats[10]; //Calcule Moyenne Jeu 3 Niveau 1
+        } catch (ArithmeticException e) {
+        }
+        try {
+            stats[28] = stats[38] / stats[11]; //Calcule Moyenne Jeu 3 Niveau 2
+        } catch (ArithmeticException e) {
+        }
+        try {
+            stats[30] = stats[39] / stats[12]; //Calcule Moyenne Jeu 3 Niveau 3
         } catch (ArithmeticException e) {
         }
 
     }
 
-    static void menuPrincipal(String[] listeDeMots, int[] stats, String[] nomstats) {
+    static void menuPrincipal(String[] listeDeMots, int[] stats, String[] nomstats) { //Gère le menu principal
         int choixMenu;
 
         do {
@@ -436,7 +432,7 @@ public class MiniProjetJava {
                                   lorsque l'utilisateur le souhaite */
     }
 
-    static void menuJeu1(String[] listeDeMots, int[] stats) {
+    static void menuJeu1(String[] listeDeMots, int[] stats) { //Gère le menu du jeu 1
 
         supprConsole();
         System.out.println("+==========================+"); //Affichage du menu
@@ -474,7 +470,7 @@ public class MiniProjetJava {
         }
     }
 
-    static void menuJeu2(int[] stats) {
+    static void menuJeu2(int[] stats) { //Gère le menu du jeu 2
 
         supprConsole();
         System.out.println("+==========================+"); //Affichage du menu
@@ -512,7 +508,7 @@ public class MiniProjetJava {
         }
     }
 
-    static void menuJeu3(String[] listeDeMots, int[] stats) {
+    static void menuJeu3(String[] listeDeMots, int[] stats) { //Gère le menu du jeu 3
 
         supprConsole();
         System.out.println("+==========================+"); //Affichage du menu
@@ -550,7 +546,7 @@ public class MiniProjetJava {
         }
     }
 
-    static void menuStatistiques(int[] stats, String[] nomstats) {
+    static void menuStatistiques(int[] stats, String[] nomstats) { //Gère le menu des Statistiques
 
         supprConsole();
         calculMoyenneStats(stats);
@@ -612,8 +608,8 @@ public class MiniProjetJava {
 
             rep = Console.lireString().toLowerCase();
 
-        } while ((!rep.equals("oui")) && (!rep.equals("non")));
-
+        } while ((!rep.equals("oui")) && (!rep.equals("non"))); //Redemande la saisie tant qu'elle n'est pas égal à oui ou non
+                                                                //n'est pas égal à oui ou non
         if (rep.equals("oui")) {
             return true;
         } else {
@@ -635,7 +631,7 @@ public class MiniProjetJava {
 
             stats[1] += 1;
 
-            restart = recommencer(niveau);
+            restart = recommencer(niveau); //Demande de recommencement
 
         } while (restart);
     }
@@ -644,7 +640,7 @@ public class MiniProjetJava {
         int nombreDeMots = 5;
         int longueurMotMin = 3;
         int longueurMotMax = 6;
-        corpsJeu1(listeDeMots, stats, nombreDeMots, longueurMotMin, longueurMotMax);
+        corpsJeu1(listeDeMots, stats, nombreDeMots, longueurMotMin, longueurMotMax); //lance le Jeu
         stats[2] += 1;
     }
 
@@ -652,7 +648,7 @@ public class MiniProjetJava {
         int nombreDeMots = 10;
         int longueurMotMin = 3;
         int longueurMotMax = 6;
-        corpsJeu1(listeDeMots, stats, nombreDeMots, longueurMotMin, longueurMotMax);
+        corpsJeu1(listeDeMots, stats, nombreDeMots, longueurMotMin, longueurMotMax); //lance le Jeu
         stats[3] += 1;
     }
 
@@ -660,12 +656,13 @@ public class MiniProjetJava {
         int nombreDeMots = 15;
         int longueurMotMin = 3;
         int longueurMotMax = 6;
-        corpsJeu1(listeDeMots, stats, nombreDeMots, longueurMotMin, longueurMotMax);
+        corpsJeu1(listeDeMots, stats, nombreDeMots, longueurMotMin, longueurMotMax); //lance le Jeu
         stats[4] += 1;
     }
 
     static String[] creationListeMotsJeu1(String[] listeDeMots, int nbMots, int longueurMotMin, int longueurMotMax) {
-
+          //Creation d'une liste de mot en respectant les parametre du niveau choisi
+        
         String[] listeMotsJeu1 = new String[nbMots];
         String[] listeSelonLgr = listeMotSelonLettres(listeDeMots, longueurMotMin, longueurMotMax);
 
@@ -675,7 +672,7 @@ public class MiniProjetJava {
             do {
                 s = motAleatoire(listeSelonLgr);
 
-            } while (estDansLaListe(listeMotsJeu1, s));
+            } while (estDansLaListe(listeMotsJeu1, s)); //Si le mot est deja dans la liste, on en choisi un autre.
 
             listeMotsJeu1[i] = s;
         }
@@ -684,36 +681,38 @@ public class MiniProjetJava {
 
     }
 
-    static void afficherListeMots(String[] tab) {
+    static void afficherListeMots(String[] tab) { //Permet d'afficher la liste des mots
 
         supprConsole();
         System.out.println("+=================================+");
         System.out.println("||      Affichage des Mots       ||");
         System.out.println("+=================================+");
 
-        for (int i = 0; i < tab.length; i++) {
-            System.out.println(tab[i]); //affichage des mots un par un.
+        for (String s : tab) {
+            System.out.println(s); //affichage des mots un par un.
         }
         System.out.println("");
     }
 
     static void corpsJeu1(String[] listeDeMots, int[] stats, int nombreDeMots, int longueurMotMin, int longueurMotMax) {
-
+                    //Execute le jeu 1 avec les paramètre du niveau choisi
+        
         String[] listeMotsJeu1 = creationListeMotsJeu1(listeDeMots, nombreDeMots, longueurMotMin, longueurMotMax);
 
         supprConsole();
 
-        int score = 0;
+        int score = 0; //Le score en debut de partie est egal à 0
 
-        boolean haveFail = false;
-        boolean isWin = false;
+        boolean haveFail = false; //Booléen qui permet de savoir si l'utilisateur s'est tromper
+        boolean isWin = false;    //Booléan qui permet de savoir si l'utilisateur à gagné
 
-        String s;
+        String s; //String utiliser en tant que saisie de l'utilisateur
 
-        for (int i = 0; i < nombreDeMots; i++) {
+        for (int i = 0; i < nombreDeMots; i++) { //Boucle tant qu'on est pas arriver au bout du nombre de mot.
+            
             System.out.println("Memorisez ce(s) mot(s) ! Appuyez sur une touche quand c'est bon !");
             for (int j = 0; j <= i; j++) {
-                System.out.print(listeMotsJeu1[j] + " / ");
+                System.out.print(listeMotsJeu1[j] + " / "); //Affiche les mots a mémorisé.
             }
 
             Console.lireInt();
@@ -722,25 +721,25 @@ public class MiniProjetJava {
 
             System.out.println("Restituer les mots (appuyer sur entrée à la fin de chaque mot).");
 
-            for (int j = 0; j <= i; j++) {
-                s = Console.lireString().toLowerCase();
-                if (!s.equals(listeMotsJeu1[j])) {
+            for (int j = 0; j <= i; j++) {               //Pour chaque mot à mémorisé
+                s = Console.lireString().toLowerCase();  //Proposition de l'utilisateur
+                if (!s.equals(listeMotsJeu1[j])) {       //Si la proposition est differente du mot
                     System.out.println("Mauvais mot !");
-                    haveFail = true;
-                    break;
-                } else {
-                    System.out.println("Mot Correct");
+                    haveFail = true;                     //Utilisateur s'est trompé
+                    break;                               //On sort de la boucle
+                } else {                                 //Sinon
+                    System.out.println("Mot Correct");   //Il a juste
                 }
-                if (j == nombreDeMots - 1) {
-                    isWin = true;
+                if (j == nombreDeMots - 1) {             //Si l'utilisateur arrive au bout sans se tromber
+                    isWin = true;                        //Il a gagné
                 }
             }
 
-            if (haveFail) {
-                break;
+            if (haveFail) { //Si l'utilisateur s'est trompé
+                break;      //On sort de la boucle
             }
 
-            score += 1;
+            score += 1; //On rajoute 1 au score
         }
 
         if (isWin) {
@@ -749,19 +748,19 @@ public class MiniProjetJava {
         Timer.attendreSecondes(1);
         System.out.println("Vous avez restitue " + score + " mots !");
 
-        if (nombreDeMots == 5) {
+        if (nombreDeMots == 5) { //Si parametre du niveau 1 on actualise les stats
             stats[31] += score;
             if (stats[13] < score) {
                 stats[13] = score;
             }
         }
-        if (nombreDeMots == 10) {
+        if (nombreDeMots == 10) { //Si parametre du niveau 2 on actualise les stats
             stats[32] += score;
             if (stats[15] < score) {
                 stats[15] = score;
             }
         }
-        if (nombreDeMots == 15) {
+        if (nombreDeMots == 15) { //Si parametre du niveau 3 on actualise les stats
             stats[33] += score;
             if (stats[17] < score) {
                 stats[17] = score;
@@ -785,7 +784,7 @@ public class MiniProjetJava {
 
             stats[5] += 1;
 
-            restart = recommencer(niveau);
+            restart = recommencer(niveau); //Demande de recommencement
 
         } while (restart);
     }
@@ -793,29 +792,33 @@ public class MiniProjetJava {
     static void jeu2Niveau1(int[] stats) { //Initialisation des param de difficulté
         int nombreDeNombres = 5;
         int nombreMax = 10;
-        corpsJeu2(nombreDeNombres, nombreMax, stats);
+        corpsJeu2(nombreDeNombres, nombreMax, stats); //lance le Jeu
         stats[6] += 1;
     }
 
     static void jeu2Niveau2(int[] stats) { //Initialisation des param de difficulté
         int nombreDeNombres = 10;
         int nombreMax = 100;
-        corpsJeu2(nombreDeNombres, nombreMax, stats);
+        corpsJeu2(nombreDeNombres, nombreMax, stats); //lance le Jeu
         stats[7] += 1;
     }
 
     static void jeu2Niveau3(int[] stats) { //Initialisation des param de difficulté
         int nombreDeNombres = 15;
         int nombreMax = 1000;
-        corpsJeu2(nombreDeNombres, nombreMax, stats);
+        corpsJeu2(nombreDeNombres, nombreMax, stats); //lance le Jeu
         stats[8] += 1;
     }
 
     static void corpsJeu2(int nombreDeNombres, int nombreMax, int[] stats) {
-
+                //Execute le jeu 2 avec les paramètre du niveau choisi
+                
         int tab[] = new int[nombreDeNombres];
+        
         for (int i = 0; i < tab.length; i++) {
+            
             boolean verifDoublon = false;
+            
             do {
                 verifDoublon = false;
                 tab[i] = genererUnEntier(nombreMax);
@@ -824,35 +827,44 @@ public class MiniProjetJava {
                         verifDoublon = true;
                     }
                 }
-            } while (verifDoublon);
+            } while (verifDoublon); //Creation d'un tableau de nombre tous différents
         }
+        
         int[] tabverif = new int[nombreDeNombres];
+        
         for (int y = 0; y < tab.length; y++) {
+            
             supprConsole();
+            
             System.out.println("Les chiffre sont : ");
             for (int x = 0; x <= y; x++) {
                 System.out.println(tab[x]);
             }
+            
             controleSaisie();
+            
             supprConsole();
+            
             for (int a = 0; a <= y; a++) {
                 System.out.print("Saisir le chiffre numéro " + a + " mémoriser : ");
                 tabverif[a] = Console.lireInt();
+                
                 if (tab[a] != tabverif[a]) {
                     System.out.println("Vous avez mémoriser " + y + " chiffres");
-                    if (nombreDeNombres == 5) {
+                    
+                    if (nombreDeNombres == 5) { //Si parametre du niveau 1 on actualise les stats
                         stats[34] += y;
                         if (stats[19] < y) {
                             stats[19] = y;
                         }
                     }
-                    if (nombreDeNombres == 10) {
+                    if (nombreDeNombres == 10) { //Si parametre du niveau 2 on actualise les stats
                         stats[35] += y;
                         if (stats[21] < y) {
                             stats[21] = y;
                         }
                     }
-                    if (nombreDeNombres == 15) {
+                    if (nombreDeNombres == 15) { //Si parametre du niveau 3 on actualise les stats
                         stats[36] += y;
                         if (stats[23] < y) {
                             stats[23] = y;
@@ -882,7 +894,7 @@ public class MiniProjetJava {
 
             stats[9] += 1;
 
-            restart = recommencer(niveau);
+            restart = recommencer(niveau); //Demande de recommencement
 
         } while (restart);
     }
@@ -891,7 +903,7 @@ public class MiniProjetJava {
         int nombreDePaires = 5;
         int longueurMotMin = 3;
         int longueurMotMax = 6;
-        corpsJeu3(listeDeMots, stats, nombreDePaires, longueurMotMin, longueurMotMax);
+        corpsJeu3(listeDeMots, stats, nombreDePaires, longueurMotMin, longueurMotMax); //lance le jeu
         stats[10] += 1;
     }
 
@@ -899,7 +911,7 @@ public class MiniProjetJava {
         int nombreDePaires = 10;
         int longueurMotMin = 5;
         int longueurMotMax = 8;
-        corpsJeu3(listeDeMots, stats, nombreDePaires, longueurMotMin, longueurMotMax);
+        corpsJeu3(listeDeMots, stats, nombreDePaires, longueurMotMin, longueurMotMax); //lance le jeu
         stats[11] += 1;
     }
 
@@ -907,12 +919,13 @@ public class MiniProjetJava {
         int nombreDePaires = 15;
         int longueurMotMin = 7;
         int longueurMotMax = 11;
-        corpsJeu3(listeDeMots, stats, nombreDePaires, longueurMotMin, longueurMotMax);
+        corpsJeu3(listeDeMots, stats, nombreDePaires, longueurMotMin, longueurMotMax); //lance le jeu
         stats[12] += 1;
     }
 
     static String[][] creationListePaires(String[] listeDeMots, int nombreDePaires, int longueurMotMin, int longueurMotMax) {
         //creation d'une liste de paires pour le jeu 3
+        
         String[][] listeDePaires = new String[2][nombreDePaires];
 
         String[] listeSelonLgr = listeMotSelonLettres(listeDeMots, longueurMotMin, longueurMotMax);
@@ -925,9 +938,10 @@ public class MiniProjetJava {
                     s = motAleatoire(listeSelonLgr);
 
                 } while (estDansLaListe(listeDePaires[0], s)
-                        || estDansLaListe(listeDePaires[1], s));
+                        || estDansLaListe(listeDePaires[1], s)); //On cherche un mot aléatoire mais qui n'est pas 
+                                                                 //dans le tableau à deux dimension
 
-                listeDePaires[i][j] = s;
+                listeDePaires[i][j] = s; //Ajoute l'élément dans le tableau.
             }
 
         }
@@ -935,7 +949,7 @@ public class MiniProjetJava {
         return listeDePaires;
     }
 
-    static void afficherListePaires(String[][] tab) {
+    static void afficherListePaires(String[][] tab){  //Affiche le tableau de paire.
 
         supprConsole();
         System.out.println("+=================================+");
@@ -949,7 +963,8 @@ public class MiniProjetJava {
     }
 
     static void corpsJeu3(String[] listeDeMots, int[] stats, int nombreDePaires, int longueurMotMin, int longueurMotMax) {
-
+            //Execute le jeu 3 avec les paramètre du niveau choisi
+        
         String[][] listePaires = creationListePaires(listeDeMots, nombreDePaires, longueurMotMin, longueurMotMax);
 
         afficherListePaires(listePaires);
@@ -961,25 +976,26 @@ public class MiniProjetJava {
 
         supprConsole();
 
-        int score = 0;
+        int score = 0; //Le score est initialisé à 0
 
         boolean isWin = false;
 
         for (int i = 0; i < nombreDePaires; i++) {
-            int random = genererUnEntier(listePaires[0].length) - 1;
+            int random = genererUnEntier(listePaires[0].length) - 1; //Choix d'un mot aléatoire
 
             System.out.print("Complétez la paire : " + listePaires[0][random] + " / ");
-            String proposition = Console.lireString();
-            if (!proposition.equals(listePaires[1][random])) {
-                System.out.println("Mauvais mot\n");
-                break;
-            } else {
+            String proposition = Console.lireString(); //Proposition du joueur
+            
+            if (!proposition.equals(listePaires[1][random])) { //Si proposition pas égal au mot
+                System.out.println("Mauvais mot\n");           //correspond au mot aléatoire choisi.
+                break;                                         //Sort de la boucle
+            } else {                                                        //Sinon
                 System.out.println("Bien joué");
-                score += 1;
-                listePaires = supprElementParIndice(listePaires, random);
+                score += 1;                                                 //Augmente le score de 1
+                listePaires = supprElementParIndice(listePaires, random);   //Supprime les éléments trouvés de la liste
             }
-            if (i == nombreDePaires - 1) {
-                isWin = true;
+            if (i == nombreDePaires - 1) { //Si l'utilisateur est arrivé au bout
+                isWin = true;              //Il a gagné
             }
         }
         if (isWin) {
@@ -988,19 +1004,19 @@ public class MiniProjetJava {
         Timer.attendreSecondes(1);
         System.out.println("Vous avez restitue " + score + " paires !");
 
-        if (nombreDePaires == 5) {
+        if (nombreDePaires == 5) { //Si parametre du niveau 1 on actualise les stats
             stats[37] += score;
             if (stats[25] < score) {
                 stats[25] = score;
             }
         }
-        if (nombreDePaires == 10) {
+        if (nombreDePaires == 10) { //Si parametre du niveau 2 on actualise les stats
             stats[38] += score;
             if (stats[27] < score) {
                 stats[27] = score;
             }
         }
-        if (nombreDePaires == 15) {
+        if (nombreDePaires == 15) { //Si parametre du niveau 3 on actualise les stats
             stats[39] += score;
             if (stats[29] < score) {
                 stats[29] = score;
@@ -1011,13 +1027,13 @@ public class MiniProjetJava {
 
     }
 
-    static void _34ST3R_3GG() {
+    static void _34ST3R_3GG() { //3X3CUT3 L'345T3R_3GG S1 D3550U5
         supprConsole();
         System.out.println("                    ____     ____\n" + "                  /'    |   |    \\\n" + "                /    /  |   | \\   \\\n" + "              /    / |  |   |  \\   \\\n" + "             (   /   |  \"\"\"\"   |\\   \\ \n" + "             | /   / /^\\    /^\\  \\  _|\n" + "              ~   | |   |  |   | | ~\n" + "                  | |__O|__|O__| |\n" + "                /~~      \\/     ~~\\\n" + "               /   (      |      )  \\\n" + "         _--_  /,   \\____/^\\___/'   \\  _--_\n" + "       /~    ~\\ / -____-|_|_|-____-\\ /~    ~\\\n" + "     /________|___/~~~~\\___/~~~~\\ __|________\\\n" + "--~~~          ^ |     |   |     |  -     :  ~~~~~:~-_     ___-----~~~~~~~~|\n" + "   /             `^-^-^'   `^-^-^'                  :  ~\\ /'   ____/--------|\n" + "       --                                            ;   |/~~~------~~~~~~~~~|\n" + " ;                                    :              :    |----------/--------|\n" + ":                     ,                           ;    .  |---\\\\--------------|\n" + " :     -                          .                  : : |______________-__|\n" + "  :              ,                 ,                :   /'~----___________|\n" + "__  \\\\\\        ^                          ,, ;; ;; ;._-~\n" + "  ~~~-----____________________________________----~~~");
         Timer.attendreSecondes(5);
     }
 
-    static void supprConsole() {
+    static void supprConsole() { //Affiche plusieurs ligne vide pour "effacer" la console
         for (int i = 0; i < 66; i++) {
             System.out.println("");
         }
