@@ -1,7 +1,7 @@
 /**
  * Classe Timer
  * @author Hervé Martinez
- * modified by Maxime BOUDIER long => double
+ * modified by Maxime BOUDIER add attendreMilli()
  */
 
 public class Timer {
