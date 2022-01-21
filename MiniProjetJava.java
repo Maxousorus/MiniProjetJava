@@ -79,16 +79,16 @@ public class MiniProjetJava {
             char c = chartext[i];
             if (c == 'ê' || c == 'ë' || c == 'é' || c == 'è') {
                 chartext[i] = 'e';
-                
+
             } else if (c == 'â' || c == 'ä' || c == 'à') {
                 chartext[i] = 'a';
-                
+
             } else if (c == 'ü' || c == 'ù' || c == 'û') {
                 chartext[i] = 'u';
-                
+
             } else if (c == 'ï' || c == 'î') {
                 chartext[i] = 'i';
-                
+
             } else if (c == 'ö' || c == 'ô') {
                 chartext[i] = 'o';
             }
@@ -96,7 +96,7 @@ public class MiniProjetJava {
         return chartext;
     }
 
-    static String[] recupListeDeMots(String text) { 
+    static String[] recupListeDeMots(String text) {
 
         char[] chartext = text.toLowerCase().toCharArray();
         String[] listeMots = new String[0]; //Création de la liste de mot avec aucun élément
@@ -214,7 +214,7 @@ public class MiniProjetJava {
     }
 
     static boolean estComprisEntre(int nombre, int limite1, int limite2) {//Vérifie si un nombre est compris 
-                                                                          //entre deux autres
+        //entre deux autres
         if (limite1 < limite2) { //Si la limite1 est plus petite
             return limite1 <= nombre && nombre <= limite2; //On verif si le nombre est compris entre les deux
         } else //Si la limite2 est plus grande
@@ -335,7 +335,7 @@ public class MiniProjetJava {
     }
 
     static void calculMoyenneStats(int[] stats) { //Calcule les moyennes unes par unes grâce à d'autre
-                                                  //statistiques.
+        //statistiques.
 
         try {
             stats[14] = stats[31] / stats[2]; //Calcule Moyenne Jeu 1 Niveau 1
@@ -609,7 +609,7 @@ public class MiniProjetJava {
             rep = Console.lireString().toLowerCase();
 
         } while ((!rep.equals("oui")) && (!rep.equals("non"))); //Redemande la saisie tant qu'elle n'est pas égal à oui ou non
-                                                                //n'est pas égal à oui ou non
+        //n'est pas égal à oui ou non
         if (rep.equals("oui")) {
             return true;
         } else {
@@ -661,8 +661,8 @@ public class MiniProjetJava {
     }
 
     static String[] creationListeMotsJeu1(String[] listeDeMots, int nbMots, int longueurMotMin, int longueurMotMax) {
-          //Creation d'une liste de mot en respectant les parametre du niveau choisi
-        
+        //Creation d'une liste de mot en respectant les parametre du niveau choisi
+
         String[] listeMotsJeu1 = new String[nbMots];
         String[] listeSelonLgr = listeMotSelonLettres(listeDeMots, longueurMotMin, longueurMotMax);
 
@@ -695,8 +695,8 @@ public class MiniProjetJava {
     }
 
     static void corpsJeu1(String[] listeDeMots, int[] stats, int nombreDeMots, int longueurMotMin, int longueurMotMax) {
-                    //Execute le jeu 1 avec les paramètre du niveau choisi
-        
+        //Execute le jeu 1 avec les paramètre du niveau choisi
+
         String[] listeMotsJeu1 = creationListeMotsJeu1(listeDeMots, nombreDeMots, longueurMotMin, longueurMotMax);
 
         supprConsole();
@@ -709,7 +709,7 @@ public class MiniProjetJava {
         String s; //String utiliser en tant que saisie de l'utilisateur
 
         for (int i = 0; i < nombreDeMots; i++) { //Boucle tant qu'on est pas arriver au bout du nombre de mot.
-            
+
             System.out.println("Memorisez ce(s) mot(s) ! Appuyez sur une touche quand c'est bon !");
             for (int j = 0; j <= i; j++) {
                 System.out.print(listeMotsJeu1[j] + " / "); //Affiche les mots a mémorisé.
@@ -811,14 +811,14 @@ public class MiniProjetJava {
     }
 
     static void corpsJeu2(int nombreDeNombres, int nombreMax, int[] stats) {
-                //Execute le jeu 2 avec les paramètre du niveau choisi
-                
+        //Execute le jeu 2 avec les paramètre du niveau choisi
+
         int tab[] = new int[nombreDeNombres];
-        
+
         for (int i = 0; i < tab.length; i++) {
-            
+
             boolean verifDoublon = false;
-            
+
             do {
                 verifDoublon = false;
                 tab[i] = genererUnEntier(nombreMax);
@@ -829,29 +829,29 @@ public class MiniProjetJava {
                 }
             } while (verifDoublon); //Creation d'un tableau de nombre tous différents
         }
-        
+
         int[] tabverif = new int[nombreDeNombres];
-        
+
         for (int y = 0; y < tab.length; y++) {
-            
+
             supprConsole();
-            
+
             System.out.println("Les chiffre sont : ");
             for (int x = 0; x <= y; x++) {
                 System.out.println(tab[x]);
             }
-            
+
             controleSaisie();
-            
+
             supprConsole();
-            
+
             for (int a = 0; a <= y; a++) {
                 System.out.print("Saisir le chiffre numéro " + a + " mémoriser : ");
                 tabverif[a] = Console.lireInt();
-                
+
                 if (tab[a] != tabverif[a]) {
                     System.out.println("Vous avez mémoriser " + y + " chiffres");
-                    
+
                     if (nombreDeNombres == 5) { //Si parametre du niveau 1 on actualise les stats
                         stats[34] += y;
                         if (stats[19] < y) {
@@ -925,7 +925,7 @@ public class MiniProjetJava {
 
     static String[][] creationListePaires(String[] listeDeMots, int nombreDePaires, int longueurMotMin, int longueurMotMax) {
         //creation d'une liste de paires pour le jeu 3
-        
+
         String[][] listeDePaires = new String[2][nombreDePaires];
 
         String[] listeSelonLgr = listeMotSelonLettres(listeDeMots, longueurMotMin, longueurMotMax);
@@ -939,7 +939,7 @@ public class MiniProjetJava {
 
                 } while (estDansLaListe(listeDePaires[0], s)
                         || estDansLaListe(listeDePaires[1], s)); //On cherche un mot aléatoire mais qui n'est pas 
-                                                                 //dans le tableau à deux dimension
+                //dans le tableau à deux dimension
 
                 listeDePaires[i][j] = s; //Ajoute l'élément dans le tableau.
             }
@@ -949,7 +949,7 @@ public class MiniProjetJava {
         return listeDePaires;
     }
 
-    static void afficherListePaires(String[][] tab){  //Affiche le tableau de paire.
+    static void afficherListePaires(String[][] tab) {  //Affiche le tableau de paire.
 
         supprConsole();
         System.out.println("+=================================+");
@@ -963,8 +963,8 @@ public class MiniProjetJava {
     }
 
     static void corpsJeu3(String[] listeDeMots, int[] stats, int nombreDePaires, int longueurMotMin, int longueurMotMax) {
-            //Execute le jeu 3 avec les paramètre du niveau choisi
-        
+        //Execute le jeu 3 avec les paramètre du niveau choisi
+
         String[][] listePaires = creationListePaires(listeDeMots, nombreDePaires, longueurMotMin, longueurMotMax);
 
         afficherListePaires(listePaires);
@@ -985,7 +985,7 @@ public class MiniProjetJava {
 
             System.out.print("Complétez la paire : " + listePaires[0][random] + " / ");
             String proposition = Console.lireString(); //Proposition du joueur
-            
+
             if (!proposition.equals(listePaires[1][random])) { //Si proposition pas égal au mot
                 System.out.println("Mauvais mot\n");           //correspond au mot aléatoire choisi.
                 break;                                         //Sort de la boucle
@@ -1041,7 +1041,7 @@ public class MiniProjetJava {
 
     public static void main(String[] args) { //Méthode main
 
-        //ecranChargement();
+        ecranChargement();
         String text = recupText("./Extrait_texte.txt"); //Ceci fonctionne quand on execute avec Windows PowerShell
         if (text.equals("ERROR")) {
             text = recupText("src/Extrait_texte.txt");  //Ceci fonctionne avec Netbeans
